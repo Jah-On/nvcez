@@ -1,7 +1,7 @@
 clear
 
 vhdlFiles=$(ls | grep ^\.*.vhd    | tr "\n" " ")
-testBench=$(ls | grep ^\.*_tb.vhd | tr -d ".vhd")
+testBench=$(ls | grep ^\.*_tb.vhd | sed 's/.vhd//')
 
 nvc --std=2008 -a $vhdlFiles
 
@@ -17,4 +17,4 @@ then
     exit $?
 fi
 
-nvc --std=2008 -r $testBench
+nvc --std=2008 -r $testBench -w --format=vcd
